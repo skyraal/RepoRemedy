@@ -13,6 +13,7 @@ from textual.widgets import Button, Checkbox, Footer, Label, RichLog, Select, Te
 
 from RepoRemedy.catalog import load_catalog
 from RepoRemedy.context.github import ContextError
+from RepoRemedy.input_guidance import INPUT_GUIDANCE
 
 if TYPE_CHECKING:
     from textual.app import ComposeResult
@@ -119,7 +120,18 @@ class InputScreen(ModalScreen[bool]):
             await container.mount(
                 Label(name.replace("_", " ").capitalize(), markup=False, classes="field-name")
             )
-            await container.mount(TextArea(value, id=f"input-{index}", classes="input-field"))
+            guidance = INPUT_GUIDANCE.get(name)
+            if guidance is not None:
+                await container.mount(Label(guidance.help, markup=False, classes="field-help"))
+            sample = guidance.sample if guidance is not None else ""
+            await container.mount(
+                TextArea(
+                    value,
+                    id=f"input-{index}",
+                    classes="input-field has-sample" if sample else "input-field",
+                    placeholder=sample,
+                )
+            )
         self.query_one("#approve-inputs", Checkbox).value = False
 
     def save_draft(self) -> None:

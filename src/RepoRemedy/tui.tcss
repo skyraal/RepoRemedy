@@ -42,7 +42,9 @@ ModalScreen { align: center middle; background: #101820 90%; }
 #preview, #fields { height: 1fr; min-height: 3; }
 #preview { border: none; background: #101820; }
 .input-field { height: 4; }
+.has-sample { height: 10; }
 .field-name { color: #72D5E5; height: auto; margin-top: 1; }
+.field-help { color: $text-muted; height: auto; }
 #input-title { height: auto; color: #72D5E5; text-style: bold; margin-bottom: 1; }
 .compact #app-title { height: 1; padding: 0 1; }
 .compact #repository { padding: 0 1; }

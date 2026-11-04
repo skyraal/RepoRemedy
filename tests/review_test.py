@@ -209,3 +209,27 @@ def test_form_save_failure_keeps_draft_and_dialog_open(tmp_path, monkeypatch):
             assert plan.drafts and not plan.is_reviewed("security-policy")
 
     asyncio.run(exercise())
+
+
+def test_input_form_shows_guidance_without_submitting_samples(tmp_path):
+    plan, _ = make_plan()
+
+    async def exercise():
+        app = RemedyApp(plan, tmp_path / "plan.json")
+        async with app.run_test(size=(100, 36)) as pilot:
+            app.push_screen(InputScreen(plan, "security-policy"))
+            await pilot.pause()
+            form = app.screen
+            assert isinstance(form, InputScreen)
+            form.query_one("#route", Select).value = "pr"
+            await pilot.pause()
+            index = form.fields.index("supported_versions")
+            field = form.query_one(f"#input-{index}", TextArea)
+            field.load_text("")
+            await pilot.pause()
+            assert "<latest version>" in str(field.placeholder)
+            assert field.text == ""
+            help_text = [str(label.render()) for label in form.query(".field-help")]
+            assert any("security fixes" in text for text in help_text)
+
+    asyncio.run(exercise())
