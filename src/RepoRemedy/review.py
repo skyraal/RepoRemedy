@@ -13,7 +13,7 @@ from textual.widgets import Button, Checkbox, Footer, Label, RichLog, Select, Te
 
 from RepoRemedy.catalog import load_catalog
 from RepoRemedy.context.github import ContextError
-from RepoRemedy.input_guidance import INPUT_GUIDANCE
+from RepoRemedy.input_guidance import INPUT_GUIDANCE, find_unfilled_slots
 
 if TYPE_CHECKING:
     from textual.app import ComposeResult
@@ -111,11 +111,22 @@ class InputScreen(ModalScreen[bool]):
         assert route in {"issue", "pr"}
         values = self.plan.get_editable_inputs(self.identifier, route)
         draft = self.plan.drafts.get(self.identifier)
+        drafted = set()
         if draft is not None and draft.route == route:
             values.update({key: value for key, value in draft.values.items() if key in values})
+            drafted = set(draft.values)
         self.fields = list(values)
         container = self.query_one("#fields", VerticalScroll)
         await container.remove_children()
+        if any(INPUT_GUIDANCE[name].sample for name in values if name in INPUT_GUIDANCE):
+            await container.mount(
+                Label(
+                    "Some fields start with example text. Edit it and replace each <...> with "
+                    "your project's details.",
+                    markup=False,
+                    classes="field-help",
+                )
+            )
         for index, (name, value) in enumerate(values.items()):
             await container.mount(
                 Label(name.replace("_", " ").capitalize(), markup=False, classes="field-name")
@@ -124,9 +135,10 @@ class InputScreen(ModalScreen[bool]):
             if guidance is not None:
                 await container.mount(Label(guidance.help, markup=False, classes="field-help"))
             sample = guidance.sample if guidance is not None else ""
+            # Start empty fields from the editable sample; keep values a saved draft cleared.
             await container.mount(
                 TextArea(
-                    value,
+                    value or (sample if name not in drafted else ""),
                     id=f"input-{index}",
                     classes="input-field has-sample" if sample else "input-field",
                     placeholder=sample,
@@ -165,6 +177,13 @@ class InputScreen(ModalScreen[bool]):
         route = self.query_one("#route", Select).value
         assert route in {"issue", "pr"}
         values = {name: self.query_one(f"#input-{i}", TextArea).text for i, name in enumerate(self.fields)}
+        for index, name in enumerate(self.fields):
+            slots = find_unfilled_slots(name, values[name])
+            if slots:
+                label = name.replace("_", " ").capitalize()
+                self.notify(f"Replace {', '.join(slots)} in {label}", severity="warning")
+                self.query_one(f"#input-{index}", TextArea).focus()
+                return
         try:
             self.plan.update_inputs(self.identifier, route, values)
         except ContextError, ValueError:
