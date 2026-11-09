@@ -120,7 +120,11 @@ def test_explicit_routes_keep_missing_values_and_blocked_guards_visible():
     context = FakeGitHub().snapshot()
     proposal = propose_remedies(make_report(), context, route="pr").proposals[0]
     assert proposal.status == "needs-input" and proposal.content is None
-    assert set(proposal.missing_inputs) == {"supported_versions", "security_reporting_instructions"}
+    assert set(proposal.missing_inputs) == {
+        "supported_versions",
+        "security_reporting_instructions",
+        "response_timeline",
+    }
     issue = propose_remedies(
         make_report("IssueTemplates"), context, route="issue", approved_inputs={"ra-issue-templates"}
     ).proposals[0]

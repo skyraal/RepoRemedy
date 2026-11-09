@@ -36,6 +36,7 @@ SECTIONS = {
     "contribution_process": ("submitting changes", "contributing", "pull requests", "contribution process"),
     "security_reporting_instructions": ("reporting a vulnerability", "reporting vulnerabilities"),
     "supported_versions": ("supported versions",),
+    "response_timeline": ("what to expect", "response time", "response timeline"),
 }
 FILE_STEMS = {
     "ra-read-me": {"readme"},

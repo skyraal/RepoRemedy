@@ -62,7 +62,11 @@ def test_input_approval_and_content_review_are_separate(tmp_path):
     with pytest.raises(ContextError):
         plan.approve("security-policy")
     values = plan.get_editable_inputs("security-policy", "pr")
-    values.update(security_reporting_instructions="Use the private form", supported_versions="1.x")
+    values.update(
+        security_reporting_instructions="Use the private form",
+        supported_versions="1.x",
+        response_timeline="A reply within a week",
+    )
     plan.update_inputs("security-policy", "pr", values)
     assert plan.get_proposal("security-policy").status == "ready"
     assert not plan.is_reviewed("security-policy")
@@ -220,7 +224,11 @@ def test_incomplete_drafts_survive_save_without_authorizing_publication(tmp_path
     approve_plan(plan)
     original = plan.bundle.model_dump_json()
     values = plan.get_editable_inputs("security-policy", "pr")
-    values.update(supported_versions="", security_reporting_instructions="Unfinished draft")
+    values.update(
+        supported_versions="",
+        security_reporting_instructions="Unfinished draft",
+        response_timeline="A reply within a week",
+    )
     plan.save_input_draft("security-policy", "pr", values)
     path = tmp_path / "plan.json"
     save_plan(plan, path)

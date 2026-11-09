@@ -111,6 +111,8 @@ def test_save_and_exit_from_input_form_restores_unapproved_draft(tmp_path):
                     form.query_one(f"#input-{index}", TextArea).load_text("")
                 elif field == "security_reporting_instructions":
                     form.query_one(f"#input-{index}", TextArea).load_text("Unfinished reporting policy")
+                elif field == "response_timeline":
+                    form.query_one(f"#input-{index}", TextArea).load_text("A reply within a week")
             await pilot.press("ctrl+s")
             saved = load_plan(path)
             assert saved.drafts["security-policy"].values["supported_versions"] == ""

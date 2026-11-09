@@ -149,6 +149,7 @@ def test_options_and_host_tokens_are_isolated_and_shared_with_single(tmp_path, m
             {
                 "security-policy": {
                     "supported_versions": "1.x",
+                    "response_timeline": "A reply within a week",
                     "security_reporting_instructions": "Contact maintainers privately",
                 }
             }

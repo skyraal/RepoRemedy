@@ -145,6 +145,7 @@ def test_cli_renders_approved_pr_in_one_invocation(monkeypatch, tmp_path):
             {
                 "security-policy": {
                     "supported_versions": "1.x",
+                    "response_timeline": "A reply within a week",
                     "security_reporting_instructions": "Use the private reporting form",
                 }
             }

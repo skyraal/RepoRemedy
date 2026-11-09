@@ -28,6 +28,11 @@ INPUT_GUIDANCE = {
         "Which releases receive security fixes.",
         "| Version | Supported |\n| --- | --- |\n| <latest version> | Yes |\n| <older versions> | No |",
     ),
+    "response_timeline": InputGuidance(
+        "What reporters can expect, and when. Only promise what the maintainers can keep.",
+        "We aim to acknowledge reports within <number> business days and to share an "
+        "initial assessment within <number> business days.",
+    ),
     "development_setup": InputGuidance(
         "The commands a new contributor runs to get a working copy. Check that they work.",
         "git clone <repository URL>\ncd <project directory>\n<command that installs dependencies>",

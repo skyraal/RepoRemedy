@@ -20,6 +20,7 @@ def test_security_inputs_use_recorded_sections_and_remain_inputs(snapshot):
     assert pr.status == "complete"
     assert pr.inputs["security_reporting_instructions"].value == "Use the private reporting form"
     assert pr.inputs["supported_versions"].value == "1.x"
+    assert pr.inputs["response_timeline"].value == "A reply within a week"
     assert COMMIT in pr.inputs["supported_versions"].source
     assert result.report_sha256 == "e" * 64 and len(result.context_sha256) == 64
     assert not {"body", "title", "files", "guards"} & pr.model_dump().keys()
