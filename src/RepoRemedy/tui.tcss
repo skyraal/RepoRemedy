@@ -41,8 +41,8 @@ ModalScreen { align: center middle; background: #101820 90%; }
 #review-position { height: auto; margin-bottom: 1; color: #72D5E5; text-style: bold; }
 #preview, #fields { height: 1fr; min-height: 3; }
 #preview { border: none; background: #101820; }
-.input-field { height: 4; }
-.has-sample { height: 10; }
+.input-field { height: 7; }
+.has-sample { height: 9; }
 .field-name { color: #72D5E5; height: auto; margin-top: 1; }
 .field-help { color: $text-muted; height: auto; }
 #input-title { height: auto; color: #72D5E5; text-style: bold; margin-bottom: 1; }

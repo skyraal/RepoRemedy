@@ -7,14 +7,15 @@ import re
 
 @dataclass(frozen=True)
 class InputGuidance:
-    """Plain-language help and an example shown only while a field is empty."""
+    """Plain-language help and an editable starting example for an empty field."""
 
     help: str
     sample: str = ""
 
 
-# Angle-bracket slots mark project-specific details in samples. Samples are examples,
-# never defaults: a value still containing one of its slots has not been filled in.
+# Empty fields start from their sample so maintainers can edit rather than retype it.
+# Angle-bracket slots mark project-specific details: a value still containing one of
+# its sample's slots has not been filled in, so it is rejected.
 INPUT_GUIDANCE = {
     "verification_steps": InputGuidance(
         "How a reviewer can confirm this worked. Generated from the catalog; add project-specific checks."
