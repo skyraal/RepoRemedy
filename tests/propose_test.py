@@ -224,3 +224,16 @@ def test_bundle_reuses_shared_git_sha_validation(sha):
     data["base_commit"] = "invalid"
     with pytest.raises(ValueError):
         ProposalBundle.model_validate(data)
+
+
+def test_code_of_conduct_pr_completes_the_covenant_with_the_supplied_contact():
+    supplied = {"ra-code-of-conduct": {"enforcement_contact": "conduct@example.org"}}
+    proposal = propose_remedies(
+        make_report("CodeOfConduct"), FakeGitHub().snapshot(), supplied, approved_inputs={"ra-code-of-conduct"}
+    ).proposals[0]
+    assert proposal.status == "ready" and proposal.route == "pr"
+    assert proposal.content is not None
+    content = proposal.content.files[0].content
+    assert "responsible for enforcement at conduct@example.org." in content
+    assert "[Contributor Covenant][homepage], version 2.1" in content
+    assert "[INSERT" not in content
