@@ -23,7 +23,7 @@ The template assets have three directories:
 templates/
   catalog/  # Remedy definitions grouped by topic
   bodies/   # Five shared issue/PR body templates
-  files/    # Ten proposed-file assets, such as SECURITY.md and CONTRIBUTING.md
+  files/    # Eleven proposed-file assets, such as SECURITY.md and CONTRIBUTING.md
 ```
 
 A topic groups related findings. A body determines how a proposal is presented.

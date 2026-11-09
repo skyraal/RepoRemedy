@@ -227,6 +227,7 @@ def resolve_inputs(
         "check": ResolvedInput(value=issue.check, source="report"),
         "evidence": ResolvedInput(value=issue.evidence, source=f"report:{issue.location}"),
         "target": ResolvedInput(value=target, source="catalog"),
+        "repository_url": ResolvedInput(value=web, source="report"),
         "observed_state": _describe_observed_state(context, remedy_id, issue),
         "verification_steps": ResolvedInput(
             value=f"Review the proposed response against repository guidance. {remedy.response}\n"
