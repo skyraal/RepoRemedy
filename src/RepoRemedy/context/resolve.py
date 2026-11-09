@@ -43,7 +43,7 @@ class InputResolution(BaseModel):
     notices: list[str]
 
 
-PROTECTED_INPUTS = {"repository", "origin", "check", "evidence", "observed_state", "target"}
+PROTECTED_INPUTS = {"repository", "repository_url", "origin", "check", "evidence", "observed_state", "target"}
 
 
 def resolve_template_inputs(

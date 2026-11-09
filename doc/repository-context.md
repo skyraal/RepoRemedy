@@ -97,6 +97,7 @@ contains a value and its source; unresolved fields contain a reason.
 | --- | --- |
 | `repository`, `origin`, `check`, `evidence` | Normalized report; repository identity must match the snapshot. |
 | `target` | Catalog destination paths or repository/branch target. |
+| `repository_url` | Host-aware repository web address derived from the report identity. |
 | `observed_state` | Matching file paths or relevant API observations, including availability; no applicability conclusion is inferred. |
 | `setting_location` | Host-aware repository settings URL; detailed setting navigation remains part of later remedy logic. |
 | `verification_steps` | Catalog-based review/rerun guidance; this is a plan, not evidence that checks ran. |

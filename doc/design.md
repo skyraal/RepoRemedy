@@ -182,7 +182,7 @@ templates/
   files/
     SECURITY.md
     CONTRIBUTING.md
-    ...eight other proposed-file assets
+    ...nine other proposed-file assets
 ```
 
 Catalogs group related remedies by topic; body types determine the presentation of
@@ -201,7 +201,7 @@ The `security-policy` definition in the documentation catalog serves both audito
 The `ra-description` definition in the repository-settings catalog produces
 administrator instructions. There are 68 remedy definitions covering all 69 catalog
 rows; nine define an optional file-creation PR. The five shared bodies replace 77
-per-remedy body files. Ten proposed-file assets retain their distinct formats and
+per-remedy body files. Eleven proposed-file assets retain their distinct formats and
 content. `propose` renders these packaged assets using single-pass substitution.
 
 **Catalog contract (schema version 3):** each topic file declares `schema_version = 3`

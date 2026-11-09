@@ -33,7 +33,7 @@ def test_auto_selects_approved_pr_with_actual_files_and_diffs():
     proposal = result.proposals[0]
     assert proposal.status == "ready" and proposal.route == "pr" and all(proposal.guards.values())
     assert proposal.content is not None
-    assert proposal.content.draft and len(proposal.content.files) == 2
+    assert proposal.content.draft and len(proposal.content.files) == 3
     for file in proposal.content.files:
         assert file.operation == "create" and file.content.strip()
         assert isinstance(file.path, Path)

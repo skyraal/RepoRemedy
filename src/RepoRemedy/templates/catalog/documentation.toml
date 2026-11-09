@@ -162,7 +162,7 @@ required_inputs = [
 title = "Add issue templates to ${repository}"
 body = "create-files-pr.md"
 change_summary = "Add bug-report and feature-request templates under `.github/ISSUE_TEMPLATE/`."
-required_inputs = ["repository", "origin", "check", "evidence", "verification_steps"]
+required_inputs = ["repository", "origin", "check", "evidence", "verification_steps", "repository_url"]
 guards = ["confirmed_gap", "target_absent", "no_equivalent_file", "approved_inputs"]
 
 [[remedies."ra-issue-templates".pr.files]]
@@ -173,6 +173,11 @@ operation = "create"
 [[remedies."ra-issue-templates".pr.files]]
 path = ".github/ISSUE_TEMPLATE/feature_request.md"
 template = "feature_request.md"
+operation = "create"
+
+[[remedies."ra-issue-templates".pr.files]]
+path = ".github/ISSUE_TEMPLATE/config.yml"
+template = "issue_template_config.yml"
 operation = "create"
 
 [remedies."ra-license-file"]

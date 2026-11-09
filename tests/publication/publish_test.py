@@ -62,7 +62,7 @@ def test_file_proposal_creates_atomic_commit_and_draft_pr(tmp_path):
     assert [endpoint for endpoint, _ in api.posts] == ["/git/trees", "/git/commits", "/git/refs", "/pulls"]
     tree, commit, ref, pr = [payload for _, payload in api.posts]
     assert bundle.proposals[0].content is not None
-    assert tree["base_tree"] == TREE and len(tree["tree"]) == 2
+    assert tree["base_tree"] == TREE and len(tree["tree"]) == 3
     assert {entry["path"] for entry in tree["tree"]} == {
         f.path.as_posix() for f in bundle.proposals[0].content.files
     }
