@@ -34,6 +34,8 @@ SECTIONS = {
     "development_setup": ("development setup", "development", "setup", "building"),
     "test_instructions": ("testing", "tests", "running tests"),
     "contribution_process": ("submitting changes", "contributing", "pull requests", "contribution process"),
+    "review_expectations": ("review process", "code review", "reviews"),
+    "community_channels": ("community", "communication", "community channels", "discussion"),
     "security_reporting_instructions": ("reporting a vulnerability", "reporting vulnerabilities"),
     "supported_versions": ("supported versions",),
 }
