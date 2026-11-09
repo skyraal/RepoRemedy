@@ -63,7 +63,7 @@ required_inputs = [
     "check",
     "evidence",
     "verification_steps",
-    "approved_code_of_conduct",
+    "enforcement_contact",
 ]
 guards = ["confirmed_gap", "target_absent", "no_equivalent_file", "approved_inputs"]
 

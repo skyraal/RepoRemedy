@@ -23,7 +23,7 @@ MAINTAINER_INPUTS = {
     "approved_value",
     "approved_license_text",
     "approved_codeowners",
-    "approved_code_of_conduct",
+    "enforcement_contact",
     "approved_citation_metadata",
     "reported_expected_value",
 }
