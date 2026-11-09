@@ -43,6 +43,16 @@ INPUT_GUIDANCE = {
         "3. Open a pull request and describe the change.\n"
         "4. Update the pull request until a maintainer approves it.",
     ),
+    "review_expectations": InputGuidance(
+        "How pull requests are reviewed and how long it usually takes. Only promise what "
+        "the maintainers can keep.",
+        "We aim to review pull requests within <time frame>. Maintainers may ask for "
+        "changes before merging, and pull requests must pass <required checks>.",
+    ),
+    "community_channels": InputGuidance(
+        "Where contributors can ask questions and discuss ideas.",
+        "Ask questions and discuss ideas in <GitHub Issues, Discussions or chat link>.",
+    ),
     "project_name": InputGuidance("The name shown as the README title.", "<project name>"),
     "project_summary": InputGuidance(
         "One or two sentences: what the project does and who it is for.",
