@@ -10,6 +10,7 @@ from RepoRemedy.catalog import load_catalog
 from RepoRemedy.context.github import ContextError
 from RepoRemedy.context.repository_context import GitSha  # noqa: TC001 - runtime model
 from RepoRemedy.context.inputs import ResolvedInput, resolve_inputs
+from RepoRemedy.input_guidance import find_unfilled_slots
 
 if TYPE_CHECKING:
     from RepoRemedy.context.repository_context import RepositoryContext
@@ -73,6 +74,9 @@ def resolve_template_inputs(
             raise ContextError(message)
         if any(not isinstance(value, str) or not value.strip() for value in fields.values()):
             message = "Supplied template inputs must be nonempty strings"
+            raise ContextError(message)
+        if any(find_unfilled_slots(key, value) for key, value in fields.items()):
+            message = "Supplied template inputs still contain sample placeholders"
             raise ContextError(message)
     lookup = {
         (origin, check): identifier

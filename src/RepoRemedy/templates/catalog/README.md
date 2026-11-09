@@ -82,8 +82,7 @@ validation has run.
 
 ## Current limitations
 
-- The catalogs declare 25 distinct runtime input fields; each proposal requires
-  only its selected route's 5–10 fields. Context retrieval resolves available facts
+- Each proposal requires only its selected route's 5–10 runtime input fields. Context retrieval resolves available facts
   and unambiguous documentation sections; missing or conflicting information remains explicit.
   Report data should provide identity and evidence; repository inspection should
   provide current state; remedy logic should provide instructions and verification
@@ -114,6 +113,9 @@ validation has run.
 2. Declare the exact source checks and write the specific response.
 3. Select a shared body and list its runtime inputs. Reuse bodies across remedies.
 4. If offering a PR, declare its guards, target paths and any required file assets.
+   Give each input a maintainer must supply help text and a sample in
+   [`input_guidance.py`](../../input_guidance.py). Mark project-specific details in
+   samples with `<angle-bracket>` slots; values still containing them are rejected.
 5. Update the matching rows in the [finding catalog](../../../../doc/catalog.md),
    including the remedy ID and link to its topic file.
 6. Run `uv run pytest tests/template_assets_test.py --no-cov` from the repository root.

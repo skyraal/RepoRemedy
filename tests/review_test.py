@@ -6,6 +6,7 @@ from textual.widgets import Checkbox, Select, TextArea
 
 from plan_test import make_plan, approve_plan
 from RepoRemedy.context.github import ContextError
+from RepoRemedy.input_guidance import INPUT_GUIDANCE
 from RepoRemedy.plan import RemedyPlan
 from RepoRemedy.review import InputScreen, ReviewScreen
 from RepoRemedy.tui import RemedyApp
@@ -207,5 +208,40 @@ def test_form_save_failure_keeps_draft_and_dialog_open(tmp_path, monkeypatch):
             await pilot.press("ctrl+q")
             assert app.is_running and app.screen is form
             assert plan.drafts and not plan.is_reviewed("security-policy")
+
+    asyncio.run(exercise())
+
+
+def test_input_form_starts_from_editable_samples_and_names_unfilled_slots(tmp_path):
+    plan, _ = make_plan()
+    before = plan.model_dump_json()
+
+    async def exercise():
+        app = RemedyApp(plan, tmp_path / "plan.json")
+        async with app.run_test(size=(100, 36)) as pilot:
+            app.push_screen(InputScreen(plan, "security-policy"))
+            await pilot.pause()
+            form = app.screen
+            assert isinstance(form, InputScreen)
+            form.query_one("#route", Select).value = "pr"
+            await pilot.pause()
+            index = form.fields.index("supported_versions")
+            field = form.query_one(f"#input-{index}", TextArea)
+            assert field.text == INPUT_GUIDANCE["supported_versions"].sample
+            field.load_text("")
+            await pilot.pause()
+            # Cleared fields still show the sample as a hint, but submit nothing.
+            assert "<latest version>" in str(field.placeholder)
+            help_text = [str(label.render()) for label in form.query(".field-help")]
+            assert any("security fixes" in text for text in help_text)
+            reporting = form.fields.index("security_reporting_instructions")
+            form.query_one(f"#input-{reporting}", TextArea).load_text("Use the private reporting form")
+            field.load_text(INPUT_GUIDANCE["supported_versions"].sample)
+            form.query_one("#approve-inputs", Checkbox).value = True
+            await pilot.click("#generate")
+            await pilot.pause()
+            assert isinstance(app.screen, InputScreen)
+            assert form.focused is field
+            assert plan.model_dump_json() == before
 
     asyncio.run(exercise())
