@@ -199,7 +199,8 @@ def test_propose_populates_file_content_from_repository_guidance():
     api = FakeGitHub()
     api.file(
         "README.md",
-        "# Demo\n\n## Development setup\nuv sync\n\n## Testing\nuv run pytest\n\n## Submitting changes\nOpen a PR against main\n",
+        "# Demo\n\n## Development setup\nuv sync\n\n## Testing\nuv run pytest\n\n## Submitting changes\nOpen a PR against main\n"
+        "\n## Review process\nWithin two weeks\n\n## Community\nGitHub Issues\n",
     )
     context = api.snapshot()
     proposal = propose_remedies(
@@ -209,6 +210,7 @@ def test_propose_populates_file_content_from_repository_guidance():
     assert proposal.content is not None
     content = proposal.content.files[0].content
     assert "uv sync" in content and "uv run pytest" in content and "Open a PR against main" in content
+    assert "Within two weeks" in content and "GitHub Issues" in content
     assert proposal.inputs["development_setup"].source == f"file:README.md@{COMMIT}"
 
 

@@ -131,6 +131,8 @@ required_inputs = [
     "development_setup",
     "test_instructions",
     "contribution_process",
+    "review_expectations",
+    "community_channels",
 ]
 guards = ["confirmed_gap", "target_absent", "no_equivalent_file", "approved_inputs"]
 

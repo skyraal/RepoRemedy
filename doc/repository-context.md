@@ -103,7 +103,7 @@ contains a value and its source; unresolved fields contain a reason.
 | `affected_components` | Candidate workflow/manifest paths from the recorded tree; not a declaration that those files are defective. |
 | `project_name`, `project_summary` | Live repository metadata with that provenance explicitly recorded. |
 | `installation_instructions`, `usage_instructions`, `support_instructions` | Unambiguous matching Markdown sections from existing documentation. |
-| `development_setup`, `test_instructions`, `contribution_process` | Unambiguous matching Markdown sections from existing documentation. |
+| `development_setup`, `test_instructions`, `contribution_process`, `review_expectations`, `community_channels` | Unambiguous matching Markdown sections from existing documentation. |
 | `security_reporting_instructions`, `supported_versions`, `response_timeline` | Unambiguous matching Markdown sections from existing documentation. |
 | `reported_expected_value` | Explicit supplied audit expectation; not guessed from narrative evidence or current settings. |
 | `approved_value`, `approved_license_text`, `approved_codeowners`, `approved_code_of_conduct`, `approved_citation_metadata` | Supplied by the user; fetching current content does not establish maintainer approval. |
