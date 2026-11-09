@@ -106,7 +106,7 @@ contains a value and its source; unresolved fields contain a reason.
 | `development_setup`, `test_instructions`, `contribution_process` | Unambiguous matching Markdown sections from existing documentation. |
 | `security_reporting_instructions`, `supported_versions` | Unambiguous matching Markdown sections from existing documentation. |
 | `reported_expected_value` | Explicit supplied audit expectation; not guessed from narrative evidence or current settings. |
-| `approved_value`, `approved_license_text`, `approved_codeowners`, `approved_code_of_conduct`, `approved_citation_metadata` | Supplied by the user; fetching current content does not establish maintainer approval. |
+| `approved_value`, `approved_license_text`, `approved_codeowners`, `enforcement_contact`, `approved_citation_metadata` | Supplied by the user; fetching current content does not establish maintainer approval. |
 
 Section extraction uses Markdown headings, not semantic inference. Missing,
 unreadable or conflicting sections remain unresolved. Raw relevant files are

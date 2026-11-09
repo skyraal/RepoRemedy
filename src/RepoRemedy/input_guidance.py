@@ -79,9 +79,11 @@ INPUT_GUIDANCE = {
         'version: "<version>"\n'
         "date-released: <YYYY-MM-DD>",
     ),
-    "approved_code_of_conduct": InputGuidance(
-        "The complete policy, including who receives reports; see https://www.contributor-covenant.org/.",
-        "<complete code of conduct>\n\nReport concerns to <enforcement contact>.",
+    "enforcement_contact": InputGuidance(
+        "Who receives conduct reports, such as a monitored private email address. It completes the "
+        "Covenant sentence ending with: responsible for enforcement at ___. The rest of the file is "
+        "the Contributor Covenant 2.1.",
+        "<conduct@example.org>",
     ),
 }
 
