@@ -104,7 +104,7 @@ contains a value and its source; unresolved fields contain a reason.
 | `project_name`, `project_summary` | Live repository metadata with that provenance explicitly recorded. |
 | `installation_instructions`, `usage_instructions`, `support_instructions` | Unambiguous matching Markdown sections from existing documentation. |
 | `development_setup`, `test_instructions`, `contribution_process` | Unambiguous matching Markdown sections from existing documentation. |
-| `security_reporting_instructions`, `supported_versions` | Unambiguous matching Markdown sections from existing documentation. |
+| `security_reporting_instructions`, `supported_versions`, `response_timeline` | Unambiguous matching Markdown sections from existing documentation. |
 | `reported_expected_value` | Explicit supplied audit expectation; not guessed from narrative evidence or current settings. |
 | `approved_value`, `approved_license_text`, `approved_codeowners`, `approved_code_of_conduct`, `approved_citation_metadata` | Supplied by the user; fetching current content does not establish maintainer approval. |
 
@@ -118,7 +118,8 @@ Optional user inputs are a JSON object keyed by stable remedy ID:
 {
   "security-policy": {
     "security_reporting_instructions": "Use the project's private reporting form.",
-    "supported_versions": "The 1.x release series."
+    "supported_versions": "The 1.x release series.",
+    "response_timeline": "We aim to acknowledge reports within five business days."
   },
   "ra-require-approvals": {
     "reported_expected_value": "2",

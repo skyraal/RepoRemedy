@@ -33,7 +33,7 @@ def make_snapshot():
     )
     api.file(
         "docs/SECURITY.md",
-        "# Security\n\n## Reporting a vulnerability\nUse the private reporting form\n\n## Supported versions\n1.x\n",
+        "# Security\n\n## Reporting a vulnerability\nUse the private reporting form\n\n## What to expect\nA reply within a week\n\n## Supported versions\n1.x\n",
     )
     api.file(".github/workflows/test.yml", "name: CI")
     api.file("pyproject.toml", "[project]\nname='demo'\n")

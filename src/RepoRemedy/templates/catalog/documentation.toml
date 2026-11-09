@@ -300,6 +300,7 @@ required_inputs = [
     "verification_steps",
     "security_reporting_instructions",
     "supported_versions",
+    "response_timeline",
 ]
 guards = ["confirmed_gap", "target_absent", "no_equivalent_file", "approved_inputs"]
 
